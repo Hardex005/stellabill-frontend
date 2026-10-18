@@ -1,28 +1,27 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Navigate, Routes, Route, useLocation } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 import TransitionLayout from "./components/TransitionLayout";
-import Dashboard from "./pages/Dashboard";
-import Subscriptions from "./pages/Subscriptions";
-import SubscriptionDetail from "./pages/SubscriptionDetail"; // Fixed: Added missing import
-import Plans from "./pages/Plans";
-import CreatePlan from "./pages/CreatePlan";
-import UIMockups from "./pages/UIMockups";
-import Landing from "./pages/Landing";
-import BrowsePlans from "./pages/BrowsePlans";
-import OnboardingBusiness from "./pages/OnboardingBusiness";
-import OnboardingPayout from "./pages/OnboardingPayout";
-import OnboardingReviewPage from "./components/OnboardingReview";
-import UsageBilling from "./pages/UsageBilling";
-import OnboardingSuccess from "./pages/OnboardingSuccess";
-import GiftRedeemSuccess from "./pages/GiftRedeemSuccess";
-import RedeemGift from "./pages/RedeemGift";
-import AboutPrepaidBalances from "./components/AboutPrepaidBalances";
-import Pricing from "./pages/Pricing";
-import BrandPack from "./pages/BrandPack";
-import Settings from "./pages/Settings";
-import DesignTokens from "./pages/DesignTokens";
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Subscriptions = lazy(() => import("./pages/Subscriptions"));
+const SubscriptionDetail = lazy(() => import("./pages/SubscriptionDetail"));
+const Plans = lazy(() => import("./pages/Plans"));
+const CreatePlan = lazy(() => import("./pages/CreatePlan"));
+const Landing = lazy(() => import("./pages/Landing"));
+const BrowsePlans = lazy(() => import("./pages/BrowsePlans"));
+const OnboardingBusiness = lazy(() => import("./pages/OnboardingBusiness"));
+const OnboardingPayout = lazy(() => import("./pages/OnboardingPayout"));
+const OnboardingReviewPage = lazy(() => import("./components/OnboardingReview"));
+const UsageBilling = lazy(() => import("./pages/UsageBilling"));
+const OnboardingSuccess = lazy(() => import("./pages/OnboardingSuccess"));
+const GiftRedeemSuccess = lazy(() => import("./pages/GiftRedeemSuccess"));
+const RedeemGift = lazy(() => import("./pages/RedeemGift"));
+const AboutPrepaidBalances = lazy(() => import("./components/AboutPrepaidBalances"));
+const Pricing = lazy(() => import("./pages/Pricing"));
+const BrandPack = lazy(() => import("./pages/BrandPack"));
+const Settings = lazy(() => import("./pages/Settings"));
+const DesignTokens = lazy(() => import("./pages/DesignTokens"));
 
 function ScrollToHash() {
   const { pathname, hash } = useLocation();
@@ -43,6 +42,7 @@ function App() {
   return (
     <>
     <ScrollToHash />
+    <Suspense fallback={<div style={{ minHeight: '100vh' }} role="status" aria-label="Loading" />}>
     <Routes>
       {/* 1. Public Routes (No Layout) */}
       <Route path="/" element={<Landing />} />
@@ -80,7 +80,6 @@ function App() {
           <Route path="/subscriptions/:id/usage" element={<UsageBilling />} />
           <Route path="/settings" element={<Settings />} />
           {/* Development/UI Kit */}
-          <Route path="/ui-kit" element={<UIMockups />} />
           <Route path="/brand" element={<BrandPack />} />
           <Route path="/design-tokens" element={<DesignTokens />} />
         </Route>
@@ -89,6 +88,7 @@ function App() {
       {/* 3. Catch-all redirect - Sends users back to the dashboard for safety */}
       <Route path="*" element={<NotFound />} />
     </Routes>
+    </Suspense>
     </>
   );
 }

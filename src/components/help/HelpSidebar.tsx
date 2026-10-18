@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import {
   HelpArticle,
-  SUPPORT_EMAIL,
+  SUPPORT_URL,
   SUPPORT_HOURS,
   findRouteContext,
   getTopArticles,
@@ -508,14 +508,14 @@ export default function HelpSidebar({
       <div className="help-sidebar__contact-links">
         <a
           className="help-sidebar__contact-link help-sidebar__contact-link--primary"
-          href={`mailto:${SUPPORT_EMAIL}?subject=Stellarbill%20Help%20Request`}
+          href={SUPPORT_URL}
         >
           <Mail size={16} aria-hidden="true" />
-          Email support
+          Report an issue
         </a>
         <a
           className="help-sidebar__contact-link help-sidebar__contact-link--secondary"
-          href="https://docs.stellarbill.example"
+          href="https://github.com/Stellabill/stellabill-frontend/tree/main/docs"
           target="_blank"
           rel="noopener noreferrer"
         >

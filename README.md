@@ -2,7 +2,7 @@
 
 Web app for **Stellabill**, subscription billing on the Stellar network. Customers deposit USDC into a prepaid vault and Soroban smart contracts release funds to the merchant on each billing interval, so there are no forced debits and subscribers stay in control of their balance.
 
-**Live demo:** https://stellabill-frontend.vercel.app
+**Live demo:** https://stellabill-frontend-blush.vercel.app
 
 > All plans, subscriptions, balances and wallet data shown in the app are sample demo data. No real payments are made.
 

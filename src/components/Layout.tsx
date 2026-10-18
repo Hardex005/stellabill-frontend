@@ -101,15 +101,6 @@ const mainNav = [
 
 const devNav = [
   {
-    path: "/ui-kit",
-    label: "UI Kit",
-    icon: (
-      <svg className="sb-sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-      </svg>
-    ),
-  },
-  {
     path: "/brand",
     label: "Brand",
     icon: (
@@ -175,7 +166,6 @@ export default function Layout() {
       { id: "page-plans", label: "Plans", group: "Pages", keywords: "pricing billing", perform: () => navigate("/plans") },
       { id: "page-browse-plans", label: "Browse Plans", group: "Pages", keywords: "catalog explore", perform: () => navigate("/browse-plans") },
       { id: "page-settings", label: "Settings", group: "Pages", keywords: "preferences account", perform: () => navigate("/settings") },
-      { id: "page-ui-kit", label: "UI Kit", group: "Pages", keywords: "components developer", perform: () => navigate("/ui-kit") },
       { id: "page-brand", label: "Brand", group: "Pages", keywords: "design tokens", perform: () => navigate("/brand") },
       { id: "page-design-tokens", label: "Design Tokens", group: "Pages", keywords: "css variables colors spacing typography motion", perform: () => navigate("/design-tokens") },
     ];
@@ -342,7 +332,7 @@ export default function Layout() {
       <LandingNavbar />
       <div className="app-layout__shell">
         <aside className="sb-sidebar" aria-label="Main navigation">
-          <div className="sb-sidebar__brand">Stellarbill</div>
+          <div className="sb-sidebar__brand">Stellabill</div>
 
           <button
             type="button"

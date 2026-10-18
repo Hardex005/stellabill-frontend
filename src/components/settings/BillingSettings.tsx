@@ -47,7 +47,7 @@ export default function BillingSettings() {
     },
   })
 
-  const [paymentMethods] = useState<PaymentMethod[]>([
+  const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([
     {
       id: '1',
       type: 'card',
@@ -81,8 +81,7 @@ export default function BillingSettings() {
   }
 
   const handleSetDefaultPaymentMethod = (id: string) => {
-    // TODO: Implement set default logic
-    console.log('Setting default payment method:', id)
+    setPaymentMethods((prev) => prev.map((m) => ({ ...m, isDefault: m.id === id })))
   }
 
   const requestRemovePaymentMethod = (id: string) => {
@@ -91,8 +90,7 @@ export default function BillingSettings() {
 
   const confirmRemovePaymentMethod = () => {
     if (!pendingRemovalId) return
-    // TODO: Wire up real removal request
-    console.log('Removing payment method:', pendingRemovalId)
+    setPaymentMethods((prev) => prev.filter((m) => m.id !== pendingRemovalId))
     setPendingRemovalId(null)
   }
 

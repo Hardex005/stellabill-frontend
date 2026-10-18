@@ -444,6 +444,28 @@ export default function Subscriptions() {
 		enabled: !loading && filteredData.length > 0,
 	});
 
+	const [customTags, setCustomTags] = useState<TagOption[]>([
+		{ id: "t-priority", label: "Priority", color: "red" },
+		{ id: "t-team", label: "Team", color: "blue" },
+		{ id: "t-trial", label: "Trial", color: "yellow" },
+	]);
+	const availableTags = customTags;
+
+	const updateTags = (subId: string, fn: (tags: TagOption[]) => TagOption[]) =>
+		setData((prev) => prev.map((sub) => (sub.id === subId ? { ...sub, tags: fn(sub.tags ?? []) } : sub)));
+
+	const handleAddTag = (subId: string, tag: TagOption) =>
+		updateTags(subId, (tags) => (tags.some((t) => t.id === tag.id) ? tags : [...tags, tag]));
+
+	const handleRemoveTag = (subId: string, tagId: string) =>
+		updateTags(subId, (tags) => tags.filter((t) => t.id !== tagId));
+
+	const handleCreateTag = (label: string, color: TagOption["color"]) => {
+		const tag: TagOption = { id: `t-${Date.now()}`, label, color };
+		setCustomTags((prev) => [...prev, tag]);
+		if (selectedId) handleAddTag(selectedId, tag);
+	};
+
 	const selectedSub = useMemo(
 		() => data.find((sub) => sub.id === selectedId),
 		[selectedId, data],
@@ -729,7 +751,6 @@ export default function Subscriptions() {
 					Home
 				</Link>
 				<span className="breadcrumb-separator" aria-hidden="true">/</span>
-				<span className="breadcrumb-current" aria-current="page">My subscriptions</span>
 				<span className="breadcrumb-current" aria-current="page">{t('subscriptions.pageTitle')}</span>
 			</nav>
 
@@ -798,6 +819,7 @@ export default function Subscriptions() {
 								<th scope="col">{t('subscriptions.table.plan')}</th>
 								<th scope="col">{t('subscriptions.table.status')}</th>
 								<th scope="col">{t('subscriptions.table.price')}</th>
+								<th scope="col">Tags</th>
 								<th scope="col">{t('subscriptions.table.nextCharge')}</th>
 								<th scope="col">{t('subscriptions.table.prepaidBalance')}</th>
 								<th scope="col">

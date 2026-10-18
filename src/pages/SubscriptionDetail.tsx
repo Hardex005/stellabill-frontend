@@ -70,8 +70,7 @@ export default function SubscriptionDetail() {
     };
 
     const handleViewFullUsage = () => {
-        console.log('Navigate to full usage page');
-        // TODO: Navigate to full usage page or expand section
+        navigate(`/subscriptions/${id}/usage`);
     };
 
     // ── Mock data — replace with actual API responses ─────────────────────────
@@ -353,7 +352,7 @@ export default function SubscriptionDetail() {
                 <TrialCountdownBanner
                     trialEndsAt={trialEndsAt}
                     upgradeHref="/plans"
-                    onUpgrade={() => console.log('Upgrade clicked from trial banner')}
+                    onUpgrade={() => navigate('/plans')}
                 />
             )}
 
@@ -367,7 +366,7 @@ export default function SubscriptionDetail() {
                     { id: 'r3', when: 'Mar 30 — Final retry', status: 'upcoming' },
                 ]}
                 onFixPayment={() => {
-                    console.log('Open fix payment flow for subscription', id);
+                    navigate('/settings');
                 }}
             />
 

@@ -9,7 +9,6 @@ import {
   Plus,
   LayoutGrid,
   ExternalLink,
-  ArrowRight,
   X,
   Save,
   RotateCcw,
@@ -377,12 +376,9 @@ export default function Dashboard() {
                 title="Revenue Growth"
                 definition="Total billed revenue per month across all active subscriptions. Use the trend to spot growth or contraction early."
                 example="A spike in February often reflects annual renewals rather than new customer growth."
-                learnMoreUrl="https://docs.stellarbill.example/reports/revenue-growth"
+                learnMoreUrl="https://github.com/Stellabill/stellabill-frontend/tree/main/docs"
               />
             </h2>
-            <Link to="/reports" className="dashboard-link">
-              View Detailed Report <ArrowRight size={12} />
-            </Link>
           </div>
 
           {w.chart_revenue.status === 'error' ? (

@@ -51,8 +51,8 @@ function applyTheme(theme: Theme) {
 }
 
 export function initializeTheme() {
-  const preference = getStoredPreference();
-  applyTheme(preference === 'system' ? getSystemTheme() : preference);
+  // The app UI is designed dark-first; light mode is not fully implemented, so always render dark.
+  applyTheme('dark');
 }
 
 export function useTheme() {

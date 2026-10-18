@@ -23,7 +23,7 @@ const PRODUCT_LINKS: LinkItem[] = [
 
 const RESOURCES_LINKS: LinkItem[] = [
   { label: "Documentation", href: "https://github.com/Stellabill/stellabill-frontend#readme", isExternal: true },
-  { label: "Source code", href: "https://github.com/Stellabill", isExternal: true },
+  { label: "Source code", href: "https://github.com/Stellabill/stellabill-frontend", isExternal: true },
   { label: "Stellar Network", href: "https://stellar.org", isExternal: true },
   { label: "Report an issue", href: "https://github.com/Stellabill/stellabill-frontend/issues", isExternal: true },
 ];
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="flex items-center space-x-4">
-              <a href="https://github.com/Stellabill" target="_blank" rel="noopener noreferrer" aria-label="Stellabill on GitHub" className="p-2.5 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 rounded-xl transition-all">
+              <a href="https://github.com/Stellabill/stellabill-frontend" target="_blank" rel="noopener noreferrer" aria-label="Stellabill on GitHub" className="p-2.5 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 rounded-xl transition-all">
                 <Github size={20} />
               </a>
             </div>
@@ -135,10 +135,9 @@ const Footer: React.FC = () => {
           <p className="text-slate-500 text-sm">
             © {new Date().getFullYear()} Stellabill. Built on the Stellar Network.
           </p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="text-slate-500 hover:text-slate-300 text-xs transition-colors">Security Status</a>
-            <a href="#" className="text-slate-500 hover:text-slate-300 text-xs transition-colors">Privacy choices</a>
-          </div>
+          <a href="https://stellabill-frontend-blush.vercel.app" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-slate-300 text-xs transition-colors">
+            Live demo: stellabill-frontend-blush.vercel.app
+          </a>
         </div>
       </div>
     </footer>

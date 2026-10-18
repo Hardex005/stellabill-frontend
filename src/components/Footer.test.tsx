@@ -129,10 +129,4 @@ describe("Footer", () => {
     expect(socialLinks.length).toBeGreaterThanOrEqual(3);
   });
 
-  // ── Bottom bar ───────────────────────────────────────────────────────────
-  it("renders the bottom-bar links", () => {
-    renderFooter();
-    expect(screen.getByText("Security Status")).toBeInTheDocument();
-    expect(screen.getByText("Privacy choices")).toBeInTheDocument();
-  });
 });

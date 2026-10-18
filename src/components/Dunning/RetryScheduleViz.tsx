@@ -190,6 +190,7 @@ function StatusIcon({ status }: { status: AttemptStatus }) {
 // Compute a human-readable delta relative to "now"
 function computeDelta(scheduledAt: string, now: Date): string {
   const diff = new Date(scheduledAt).getTime() - now.getTime();
+  if (Number.isNaN(diff)) return '';
   const abs = Math.abs(diff);
   const isPast = diff < 0;
   const prefix = isPast ? '−' : '+';

@@ -67,7 +67,6 @@ vi.mock('./pages/Subscriptions', () => ({ default: () => <div data-testid="page-
 vi.mock('./pages/SubscriptionDetail', () => ({ default: () => <div data-testid="page-subscription-detail" /> }));
 vi.mock('./pages/UsageBilling', () => ({ default: () => <div data-testid="page-usage-billing" /> }));
 vi.mock('./pages/Settings', () => ({ default: () => <div data-testid="page-settings" /> }));
-vi.mock('./pages/UIMockups', () => ({ default: () => <div data-testid="page-ui-mockups" /> }));
 vi.mock('./pages/BrandPack', () => ({ default: () => <div data-testid="page-brand-pack" /> }));
 vi.mock('./pages/DesignTokens', () => ({ default: () => <div data-testid="page-design-tokens" /> }));
 
@@ -165,7 +164,6 @@ describe('App – authenticated (Layout-wrapped) routes', () => {
     { path: '/subscriptions/sub_123', testId: 'page-subscription-detail' },
     { path: '/subscriptions/sub_abc/usage', testId: 'page-usage-billing' },
     { path: '/settings', testId: 'page-settings' },
-    { path: '/ui-kit', testId: 'page-ui-mockups' },
     { path: '/brand', testId: 'page-brand-pack' },
     { path: '/design-tokens', testId: 'page-design-tokens' },
   ];

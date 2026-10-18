@@ -103,7 +103,7 @@ describe('ProductTour', () => {
       await user.click(screen.getByRole('button', { name: 'Start Tour' }));
 
       const dialog = screen.getByRole('dialog');
-      expect(within(dialog).getByText('Welcome to Stellarbill! 👋')).toBeInTheDocument();
+      expect(within(dialog).getByText('Welcome to Stellabill! 👋')).toBeInTheDocument();
       expect(within(dialog).getByText('1 of 5')).toBeInTheDocument();
       expect(within(dialog).getByRole('button', { name: 'Show me later' })).toBeInTheDocument();
       expect(within(dialog).getByRole('button', { name: /previous step/i })).toBeDisabled();

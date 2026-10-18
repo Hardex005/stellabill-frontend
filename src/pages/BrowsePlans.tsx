@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { plans as plansAPI, ApiError } from "../api/client";
+import type { ApiError } from "../api/client";
 import WalletConnectModal from "../components/WalletConnectModal";
 import ErrorState from "../components/ErrorState";
 import SortBySelect from "../components/SortBySelect";
@@ -402,8 +402,8 @@ export default function BrowsePlans() {
 					}
 				}, 800);
 			});
-			const response = await plansAPI.list();
-			setPlans(response.plans as Plan[]);
+			// No backend is deployed for this demo, so the catalog is sample data.
+			setPlans(mockPlans);
 			setLoading(false);
 		} catch (err: unknown) {
 			setError(err as Error);
@@ -659,7 +659,7 @@ export default function BrowsePlans() {
 							aria-label="Available subscription plans"
 							style={{
 								display: "grid",
-								gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
+								gridTemplateColumns: "repeat(auto-fill, minmax(min(340px, 100%), 1fr))",
 								gap: "24px 32px",
 							}}>
 							{filteredPlans.map((plan) => (

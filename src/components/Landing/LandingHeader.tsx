@@ -12,7 +12,7 @@ const LandingHeader: React.FC = () => {
             <div className={styles.left}>
                 <a href="/" className={styles.logoContainer}>
                     <div className={styles.logoIcon}>S</div>
-                    <span className={styles.logoText}>Stellarbill</span>
+                    <span className={styles.logoText}>Stellabill</span>
                 </a>
                 
                 <nav className={styles.nav}>

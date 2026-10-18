@@ -116,7 +116,23 @@ export default function Plans() {
       )}
 
       <div className="plans-page__empty-card">
-        <p>No plans configured. Add plans via API or UI form.</p>
+        <p>No plans yet. Create your first plan to get started (demo data only).</p>
+        <button
+          type="button"
+          onClick={() => navigate('/plans/create')}
+          style={{
+            marginTop: '1rem',
+            padding: '0.6rem 1.2rem',
+            background: 'linear-gradient(135deg, #38bcd4 0%, #4dd8e1 100%)',
+            border: 'none',
+            borderRadius: '8px',
+            color: '#000',
+            fontWeight: 600,
+            cursor: 'pointer',
+          }}
+        >
+          Create plan
+        </button>
       </div>
     </div>
   )

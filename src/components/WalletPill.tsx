@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import WalletDropdown from './WalletDropdown';
 import { ChevronDown, Globe } from 'lucide-react';
 
@@ -10,43 +10,21 @@ interface WalletPillProps {
 
 const WalletPill: React.FC<WalletPillProps> = ({ address, onDisconnect, network = 'Testnet' }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Truncate address: GABC...XYZ9
   const truncatedAddress = address.length > 10 
     ? `${address.slice(0, 4)}...${address.slice(-4)}`
     : address;
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleKeyDown);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen]);
-
   return (
-    <div className="relative inline-block" ref={containerRef}>
+    <div className="relative inline-block">
       <button 
+        ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-haspopup="true"
+        aria-controls="wallet-dropdown"
         className={`
           flex items-center gap-3 px-4 py-2 rounded-2xl text-sm font-bold transition-all duration-300
           ${isOpen 
@@ -72,6 +50,7 @@ const WalletPill: React.FC<WalletPillProps> = ({ address, onDisconnect, network 
         address={address} 
         onClose={() => setIsOpen(false)} 
         onDisconnect={onDisconnect}
+        triggerRef={triggerRef}
       />
     </div>
   );

@@ -186,6 +186,124 @@ describe('ConnectButton', () => {
     expect(button).not.toHaveAttribute('aria-busy');
   });
 
+  it('toggles aria-expanded on the connected trigger', async () => {
+    render(
+      <ConnectButton
+        onConnect={onConnect}
+        connectDelayMs={0}
+        randomFn={() => 0.9}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /connect wallet/i }));
+    fireEvent.click(getModalConnectButton());
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /wallet connected:/i })).toBeInTheDocument();
+    });
+
+    const connectedButton = screen.getByRole('button', { name: /wallet connected:/i });
+    expect(connectedButton).toHaveAttribute('aria-expanded', 'false');
+
+    fireEvent.click(connectedButton);
+    expect(connectedButton).toHaveAttribute('aria-expanded', 'true');
+    expect(connectedButton).toHaveAttribute('aria-controls');
+
+    fireEvent.click(connectedButton);
+    expect(connectedButton).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('closes the dropdown with Escape and returns focus to the trigger', async () => {
+    render(
+      <ConnectButton
+        onConnect={onConnect}
+        connectDelayMs={0}
+        randomFn={() => 0.9}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /connect wallet/i }));
+    fireEvent.click(getModalConnectButton());
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /wallet connected:/i })).toBeInTheDocument();
+    });
+
+    const connectedButton = screen.getByRole('button', { name: /wallet connected:/i });
+    fireEvent.click(connectedButton);
+    expect(screen.getByRole('menu')).toBeInTheDocument();
+
+    fireEvent.keyDown(document, { key: 'Escape' });
+
+    await waitFor(() => {
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    });
+    expect(connectedButton).toHaveFocus();
+  });
+
+  it('closes the dropdown on outside pointerdown', async () => {
+    render(
+      <ConnectButton
+        onConnect={onConnect}
+        connectDelayMs={0}
+        randomFn={() => 0.9}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /connect wallet/i }));
+    fireEvent.click(getModalConnectButton());
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /wallet connected:/i })).toBeInTheDocument();
+    });
+
+    const connectedButton = screen.getByRole('button', { name: /wallet connected:/i });
+    fireEvent.click(connectedButton);
+    expect(screen.getByRole('menu')).toBeInTheDocument();
+
+    fireEvent.pointerDown(document.body);
+
+    await waitFor(() => {
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    });
+  });
+
+  it('navigates menu items with arrow keys', async () => {
+    render(
+      <ConnectButton
+        onConnect={onConnect}
+        connectDelayMs={0}
+        randomFn={() => 0.9}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /connect wallet/i }));
+    fireEvent.click(getModalConnectButton());
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /wallet connected:/i })).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: /wallet connected:/i }));
+
+    const menu = screen.getByRole('menu');
+    const items = within(menu).getAllByRole('menuitem');
+    expect(items.length).toBeGreaterThan(1);
+    expect(items[0]).toHaveFocus();
+
+    fireEvent.keyDown(menu, { key: 'ArrowDown' });
+    expect(items[1]).toHaveFocus();
+
+    fireEvent.keyDown(menu, { key: 'ArrowUp' });
+    expect(items[0]).toHaveFocus();
+
+    fireEvent.keyDown(menu, { key: 'End' });
+    expect(items[items.length - 1]).toHaveFocus();
+
+    fireEvent.keyDown(menu, { key: 'Home' });
+    expect(items[0]).toHaveFocus();
+  });
+
   it('shows aria-busy during connection', async () => {
     render(
       <ConnectButton
